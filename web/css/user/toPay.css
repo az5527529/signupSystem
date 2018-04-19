@@ -1,0 +1,43 @@
+#btnDiv{
+    position:relative;
+    top:0.2rem;
+    width: 90%;
+    min-height:3rem;
+    text-align: center;
+    margin-left:1.2rem;
+}
+#btnDiv a{
+    width: 100%;
+}
+
+#infoDiv{
+    margin-top: 0.5rem;
+    /*display:flex;
+    display: -webkit-flex; !* Safari *!
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;*/
+    background-color: transparent;
+    
+}
+.signupDiv{
+    border-radius:0.5rem ;
+    border: 1px white solid;
+    width: 90%;
+    margin: 1rem;
+    background-color: white;
+    font-size: 1rem;
+    height: 13rem;
+}
+.signupDiv li{
+   
+    line-height: 2rem;
+    width: 100%;
+    margin-left: 1rem;
+}
+.signupDiv a{
+    cursor: pointer;
+    float: right;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}

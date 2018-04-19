@@ -1,0 +1,22 @@
+.btnDiv{
+    /*display:flex;
+    display: -webkit-flex; !* Safari *!
+    justify-content: space-around;*/
+    margin-top: 1rem;
+    min-height: 3rem;
+}
+.btnDiv li{
+    width: 45%;
+    display: inline-block;
+    text-align: center;
+}
+.btnDiv li a{
+    display: inline-block;
+}
+.announce{
+    margin:1rem 0.5rem;
+    font-size: 1rem;
+}
+.announce li{
+    line-height: 1.5rem;
+}

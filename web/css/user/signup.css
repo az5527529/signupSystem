@@ -1,0 +1,43 @@
+form{
+    width: 100%;
+    margin: 2rem auto;
+    /*display:flex;
+    display: -webkit-flex; !* Safari *!
+    flex-direction: column;
+    justify-content: space-around;*/
+    font-size: 1.2rem;
+}
+ul{
+    /*display:flex;
+    display: -webkit-flex; !* Safari *!
+    flex-direction: row;
+    justify-content: center;*/
+    margin-bottom: 1.2rem;
+}
+li{
+    line-height: 1.5rem;
+    display: inline-block;
+}
+.labelLi{
+    width: 25%;
+    text-align: right;
+}
+.inputLi{
+    text-align: left;
+    width: 70%;
+}
+form input{
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-size: 1.2rem;
+    width: 80%;
+}
+form input[type='radio']{
+    width:10%
+}
+
+#confirmBtn{
+    width: 90%;
+    display: inline-block;
+    margin-top: 1rem;
+}

@@ -1,0 +1,17 @@
+.tips{
+
+}
+.tips li{
+    text-align: center;
+    padding: 1rem;
+}
+.btn li{
+    padding: 1rem;
+    width:90%;
+}
+.btn a{
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    width: 60%;
+}

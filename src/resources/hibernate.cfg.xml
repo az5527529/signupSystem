@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:mysql://localhost:3306/activityManage</property>
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+      <mapping class="com.entity.Article"/>
+      <mapping class="com.entity.GovernmentInfo"/>
+      <mapping class="com.entity.PersonInfo"/>
+      <mapping class="com.entity.UserInfo"/>
+      <mapping class="com.entity.Activity"/>
+      <mapping class="com.entity.PayOrder"/>
+      <mapping class="com.entity.SignupInfo"/>
+      <mapping class="com.entity.IdentifyOrder"/>
+      <mapping class="com.entity.NoRobot"/>
+      <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>
