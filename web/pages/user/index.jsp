@@ -1,8 +1,46 @@
 ﻿
 <%@ page contentType="text/html;charset=utf-8" language="java" %>
-
+<%@ page import="com.entity.Activity" %>
+<%@ page import="com.util.StringUtil" %>
+<%@ page import="com.util.WechatUtil" %>
+<%@ page import="com.service.user.ActivityService" %>
 <%@include file="/pages/common/head.jsp"%>
+<%
+    String code = request.getParameter("code");
+    if("null".equals(code) || code == null){
+        code = "";
+    }
+    Activity headActivity = null;
+    String openid = SessionManager.getAttribute("openid") == null ? "" : SessionManager.getAttribute("openid").toString();
+    String activityId = request.getParameter("activityId");
+    //未进行微信认证
+    if(StringUtil.isEmptyString(code) && StringUtil.isEmptyString(openid)){
+        response.sendRedirect(request.getContextPath() + "/pages/user/weixin.jsp?url=" + request.getContextPath() + "/pages/user/index.jsp?activityId=" + activityId);
+        return;
+    }
+    //获取微信id\
+    if(!StringUtil.isEmptyString(code)&&StringUtil.isEmptyString(openid)){
+        WechatUtil.getWechatVo(code);
+    }
 
+    if(!StringUtil.isEmptyString(activityId)){
+        SessionManager.setAttribute("activityId",activityId);
+        WebApplicationContext wc = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+        ActivityService service = (ActivityService)wc.getBean("activityService");
+        headActivity = service.loadById(Long.parseLong(activityId));
+        SessionManager.setAttribute("activity",headActivity);
+    }else{
+        if(SessionManager.getAttribute("activityId") == null ){
+            response.sendRedirect(request.getContextPath() + "/pages/common/error.jsp");
+            return;
+        }
+    }
+%>
+<c:set value="${activity}" var="headActivity" />
+<script type="text/javascript">
+    var code = "<%=code%>";
+    var activityId= "<%=activityId%>";
+</script>
 <html>
 <head>
     <title></title>

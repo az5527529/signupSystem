@@ -120,16 +120,26 @@ public class SignupServiceImpl extends BaseServiceImpl<SignupInfo> implements Si
 //        String openid = "1";
         Long activityId = Long.parseLong(SessionManager.getAttribute("activityId").toString());
 
-        String hql = "from SignupInfo where 1=1 and openid=:openid and activityId=:id";
+//        String hql = "from SignupInfo where 1=1 and openid=:openid and activityId=:id";
+        String hql = "from SignupInfo where 1=1  and activityId=:id";
         if(!StringUtil.isEmptyString(name)){
             hql += " and name='"+name+"'";
         }
         if(!StringUtil.isEmptyString(number)){
             hql += " and number='"+number+"'";
         }
-        List<SignupInfo> list = super.getSession().createQuery(hql).setString("openid",openid)
-                .setLong("id",activityId).list();
+        /*List<SignupInfo> list = super.getSession().createQuery(hql).setString("openid",openid)
+                .setLong("id",activityId).list();*/
+        List<SignupInfo> list = super.getSession().createQuery(hql).setLong("id",activityId).list();
+        for(SignupInfo entity : list){
+            String telephone = entity.getTelephone();
+            //电话号码中间四位加密
+            entity.setTelephone(Tools.userNameReplaceWithStar(telephone));
 
+            //身份证加密
+            String idCard = entity.getIdCard();
+            entity.setIdCard(Tools.userNameReplaceWithStar(idCard));
+        }
         return list;
     }
 
@@ -139,6 +149,18 @@ public class SignupServiceImpl extends BaseServiceImpl<SignupInfo> implements Si
                 " and status=:status";
         List list = super.getSession().createSQLQuery(sql).setString("openid",openid).setString("activityId",activityId)
                     .setInteger("status",status).list();
+        if(!CollectionUtil.isEmptyCollection(list)){
+            return Integer.parseInt(list.get(0).toString());
+        }
+        return 0;
+    }
+
+    @Override
+    public int loadMaterialNum(String openid, String activityId, boolean isTake) {
+        String sql = "select ifnull(count(1),0) from signup_info where 1=1 and openid=:openid and activity_id=:activityId" +
+                " and status=:status and is_Take_Material=:isTake";
+        List list = super.getSession().createSQLQuery(sql).setString("openid",openid).setString("activityId",activityId)
+                .setInteger("isTake",isTake?1:0).setInteger("status",CommonConstants.signupStatus.PAY).list();
         if(!CollectionUtil.isEmptyCollection(list)){
             return Integer.parseInt(list.get(0).toString());
         }

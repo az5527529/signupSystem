@@ -43,4 +43,13 @@ public interface SignupService extends BaseService<SignupInfo>{
      * @return
      */
     public int loadSignNumByStatus(String openid,String activityId,int status);
+
+    /**
+     * 获取已领取或者未领取物资人数
+     * @param openid
+     * @param activityId
+     * @param isTake
+     * @return
+     */
+    public int loadMaterialNum(String openid,String activityId,boolean isTake);
 }

@@ -45,10 +45,10 @@ function searchSignupInfo() {
                         resultInfo = "支付成功";
                     }
                     signUl.append("&nbsp;&nbsp;&nbsp;&nbsp;"+resultInfo);
-                    var modifyBtn = $("<li><a onclick='edit("+info.signupInfoId+")'>修改</a></li>");
+                    /*var modifyBtn = $("<li><a onclick='edit("+info.signupInfoId+")'>修改</a></li>");
                     var deleteBtn = $("<li><a onclick='deleteInfo("+info.signupInfoId+")'>删除</a></li>");
 
-                    signupDiv.append(modifyBtn).append(deleteBtn);
+                    signupDiv.append(modifyBtn).append(deleteBtn);*/
 
                     infoDiv.append(signupDiv);
                 }

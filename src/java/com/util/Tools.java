@@ -143,4 +143,51 @@ public class Tools {
     public static long dateDiff(String interval,String strDate1, String strDate2) {
         return dateDiff(interval,toDateTime(strDate1),toDateTime(strDate2));
     }
+
+    /**
+     * 根据用户名的不同长度，来进行替换 ，达到保密效果
+     *
+     * @param userName
+     *            用户名
+     * @return 替换后的用户名
+     */
+    public static String userNameReplaceWithStar(String userName) {
+        String userNameAfterReplaced = "";
+
+        if (userName == null) {
+            userName = "";
+        }
+
+        int nameLength = userName.length();
+
+        if (nameLength <= 1) {
+             userNameAfterReplaced = "*";
+        } else if (nameLength == 2) {
+            userNameAfterReplaced = replaceAction(userName, "(?<=\\w{0})\\w(?=\\w{1})");
+        } else if (nameLength >= 3 && nameLength <= 6) {
+            userNameAfterReplaced = replaceAction(userName, "(?<=\\d{1})\\d(?=\\d{1})");
+        } else if (nameLength == 7) {
+            userNameAfterReplaced = replaceAction(userName, "(?<=\\d{1})\\d(?=\\d{2})");
+        } else if (nameLength == 8) {
+            userNameAfterReplaced = replaceAction(userName, "(?<=\\d{2})\\d(?=\\d{2})");
+        } else if (nameLength == 9) {
+            userNameAfterReplaced = replaceAction(userName, "(?<=\\d{2})\\d(?=\\d{3})");
+        } else if (nameLength == 10) {
+            userNameAfterReplaced = replaceAction(userName, "(?<=\\d{3})\\d(?=\\d{3})");
+        } else if (nameLength >= 11) {
+            userNameAfterReplaced = replaceAction(userName, "(?<=\\d{3})\\d(?=\\d{4})");
+        }
+
+        return userNameAfterReplaced;
+   }
+
+    /**
+     * 实际替换动作
+     * @param username
+     * @param regular
+     * @return
+     */
+    private static String replaceAction(String username, String regular) {
+        return username.replaceAll(regular, "*");
+    }
 }

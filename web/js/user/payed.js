@@ -1,7 +1,6 @@
 ﻿
 //加载已支付的报名信息
 $(function () {
-    
     $.ajax({
         type : "post",
         dataType : 'json',
@@ -62,7 +61,7 @@ $(function () {
     
 });
 function confirmReceive() {
-    $.messager.confirm('Confirm', '您确定已领取物资?', function (r) {
+    $.messager.confirm('Confirm', '您还有'+ungetNum+'件未领取，确定已领取全部物资?', function (r) {
         if (r) {
             $.ajax({
                 type : "post",

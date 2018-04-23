@@ -7,7 +7,15 @@
     SignupService service = (SignupService)wc.getBean("signupService");
 //    int num = 0;
     int num = service.loadSignNumByStatus(SessionManager.getAttribute("openid").toString(),SessionManager.getAttribute("activityId").toString(),1);
+    //已付款数目
+    int payedNum = service.loadSignNumByStatus(SessionManager.getAttribute("openid").toString(),SessionManager.getAttribute("activityId").toString(),3);
+    //未领取物资数目
+    int ungetNum = 0;
+    if(payedNum > 0){
+        ungetNum = service.loadMaterialNum(SessionManager.getAttribute("openid").toString(),SessionManager.getAttribute("activityId").toString(),false);
+    }
 %>
+<c:set value="${ungetNum}" var="ungetNum"></c:set>
 <html>
 <body>
     <ul>
@@ -21,7 +29,7 @@
             <a id="toPayBtn" href="${ctx}/toPay.jsp">待付(<span id="number" style="color: red;"><%=num%></span>)</a>
         </li>
         <li>
-            <a id="payedBtn" href="${ctx}/pages/user/payed.jsp">已付</a>
+            <a id="payedBtn" href="${ctx}/pages/user/payed.jsp">已付(<span style="color: red;"><%=payedNum%></span>)</a>
         </li>
     </ul>
 
