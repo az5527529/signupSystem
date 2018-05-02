@@ -11,17 +11,19 @@
         code = "";
     }
     Activity headActivity = null;
-    String openid = SessionManager.getAttribute("openid") == null ? "" : SessionManager.getAttribute("openid").toString();
+//    String openid = SessionManager.getAttribute("openid") == null ? "" : SessionManager.getAttribute("openid").toString();
+    String openid = "1";
+    SessionManager.setAttribute("openid",openid);
     String activityId = request.getParameter("activityId");
     //未进行微信认证
-    if(StringUtil.isEmptyString(code) && StringUtil.isEmptyString(openid)){
+    /*if(StringUtil.isEmptyString(code) && StringUtil.isEmptyString(openid)){
         response.sendRedirect(request.getContextPath() + "/pages/user/weixin.jsp?url=" + request.getContextPath() + "/pages/user/index.jsp?activityId=" + activityId);
         return;
     }
     //获取微信id\
     if(!StringUtil.isEmptyString(code)&&StringUtil.isEmptyString(openid)){
         WechatUtil.getWechatVo(code);
-    }
+    }*/
 
     if(!StringUtil.isEmptyString(activityId)){
         SessionManager.setAttribute("activityId",activityId);
@@ -36,7 +38,7 @@
         }
     }
 %>
-<c:set value="${activity}" var="headActivity" />
+<c:set value="${activity}" var="activity" />
 <script type="text/javascript">
     var code = "<%=code%>";
     var activityId= "<%=activityId%>";
@@ -65,7 +67,8 @@
                 </ul>
             </div>
             <div id="announce" class="announce">
-                <p style="text-align: center;font-size: 3rem;">报名已截止</p>
+                ${activity.content}
+                <%--<p style="text-align: center;font-size: 3rem;">报名已截止</p>--%>
                 <%--<li style="text-align: center;">免责声明</li>
                 <li style="text-align: center;color: red;">请仔细阅读以下活动声明，报名者提交报名信息即被默认为同意以下声明内容：</li>
 

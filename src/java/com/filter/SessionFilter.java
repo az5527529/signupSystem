@@ -27,7 +27,7 @@ public class SessionFilter implements Filter {
         String currentURL = req.getRequestURI();
 
         //如果是忽略的路径，isIgnored返回true
-        /*if (!this.isIgnored(currentURL, req) //没被忽略的路径
+        if (!this.isIgnored(currentURL, req) //没被忽略的路径
             && (SessionManager.getUserInfo() == null) && (SessionManager.getAttribute("activity") == null)) {//没登陆
             //普通路径，切用户没登录
             //如果是ajax请求响应头会有，x-requested-with；
@@ -39,9 +39,10 @@ public class SessionFilter implements Filter {
                 res.getWriter().print("sessionOut");
                 return;
             }
-            res.sendRedirect(req.getContextPath() + "/login.jsp");
+            res.getWriter().print("<script language='javascript'>window.top.location='"+req.getContextPath()+"/login.jsp';</script>");
+//            res.sendRedirect(req.getContextPath() + "/login.jsp");
             return;
-        }*/
+        }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

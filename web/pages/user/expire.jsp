@@ -33,7 +33,7 @@
                 </li>
         </div>
         <div style="text-align: center;margin-top: 1rem">
-            <a style="color: blue"  href="announce.jsp">活动声明</a>
+            <a style="color: blue"  href="index.jsp">活动声明</a>
         </div>
 
     </div>
